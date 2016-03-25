@@ -1,0 +1,171 @@
+=============================================
+preparation - Install node modules 
+=============================================
+
+$npm init
+$npm install --save-dev webpack
+$npm install --save react@0.14.3
+$npm install --save react-dom@0.14.3
+$npm install --save-dev babel-core@6.3.13 babel-loader@6.2.0 babel-preset-es2015@6.3.13 babel-preset-react@6.3.13
+$npm install --save react-router@1.0.1 history@1.13.1
+
+
+=============================================
+Set Up - Set up the file structure
+=============================================
+
+$touch webpack.config.js
+
+$mkdir public 
+$cd public
+$touch index.html
+
+$cd ..
+$mkdir app
+$cd app
+$mkdir components
+$cd components
+$touch Main.js
+$touch Home.js
+
+$cd ..
+$touch App.js
+$mkdir config
+$cd config
+$touch routes.js
+
+=============================================
+Set Up - config the webpack file
+=============================================
+
+@moveToReact/webpack.config.js
+	write the following code 
+
+	module.exports = {
+		entry: "./app/App.js",
+		output: {
+		    filename: "public/bundle.js"
+		},
+		module: {
+		    loaders: [{
+		        test: /\.jsx?$/,
+		        exclude: /(node_modules|bower_components)/,
+		        loader: 'babel',
+		        query: {
+		            presets: ['react', 'es2015']
+		        }
+		    }]
+		}
+	}
+
+=============================================
+Set Up - the basic index.html
+=============================================
+
+@moveToReact/public/index.html
+	write the following code
+
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>CivicDashboards</title>
+	</head>
+
+	<body>
+		<div id="app"></div>
+		<script src="bundle.js"></script>
+	</body>
+	</html>
+
+
+=============================================
+Set Up - the entry of our web app -App.js
+=============================================
+
+@moveToReact/app/App.js
+	write the following code
+
+	import React from 'react';
+	import ReactDOM from 'react-dom';
+	import { Router } from 'react-router';
+	import routes from'./config/routes';
+
+	ReactDOM.render(
+		<Router>{routes}</Router>,
+		document.getElementById('app')
+	)
+
+=============================================
+Set Up - the basic routes of our web app
+=============================================
+
+@moveToReact/config/routes.js
+	write the following code
+
+	import React from 'react';
+	import Main from '../components/Main';
+	import Home from '../components/Home';
+	import { Route, IndexRoute} from 'react-router';
+
+	export default (
+	  <Route path="/" component={Main}>
+	    <IndexRoute component={Home} />
+	  </Route>
+	);
+
+
+=============================================
+Set Up - the Main component 
+=============================================
+
+@moveToReact/componenets/Main.js
+	write the following code
+
+	import React from 'react';
+
+	const Main = ({children}) => {
+		return (
+			<div className="Main-container">
+				I will be the nav bar
+				<div className="container">
+					{children}
+				</div>
+			</div>
+		)
+	}
+
+	export default Main;
+
+=============================================
+Set Up - the Home component 
+=============================================
+
+@moveToReact/componenets/Home.js
+	write the following code
+
+	import React from 'react';
+
+	const Home = () =>{
+		return (
+			<h2>
+				I am from the home component. The default view. I can be replaced by anything :)
+			</h2>
+		)
+	}
+
+	export default Home;
+
+
+
+==========================================================================================
+ARE YOU READY?! LET'S START THE SERVER~~~~ You have the basic structure now. Have fun.
+==========================================================================================
+
+
+$cd moveToReact
+$webpack -w
+manually open index.html in the browser
+
+
+
