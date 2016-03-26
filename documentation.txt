@@ -127,7 +127,7 @@ Set Up - the Main component
 	const Main = ({children}) => {
 		return (
 			<div className="Main-container">
-				I will be the nav bar
+				Hi there. I am the nav bar placeholder. Glad to see you.
 				<div className="container">
 					{children}
 				</div>
@@ -168,4 +168,12 @@ $webpack -w
 manually open index.html in the browser
 
 
+========================
+include material ui
+=======================
+$npm install material-ui --save
+$npm i react-tap-event-plugin
 
+Add the following two lines in App.js
+	import injectTapEventPlugin from 'react-tap-event-plugin';
+	injectTapEventPlugin();
